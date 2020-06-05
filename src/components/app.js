@@ -11,7 +11,7 @@ const App = () => {
     const [todasLasCartas, setTodasLasCartas] = useState([]);
 
     const [state, setState] = useState({
-        valorInput: ""
+        valorInput: 0
     })
 
     function randomValues(arr) {
@@ -27,14 +27,33 @@ const App = () => {
 
         setState({
             ...state,
-            valorInput: e.target.value
+            valorInput: parseInt(e.target.value)
         })
     }
 
     const draw = (e) => {
-        for (let i = 0; i < state.valorInput; i++){
-            
+        setTodasLasCartas([])
+        let resultado = []
+
+        for (let i = 0; i < state.valorInput; i++) {
+            resultado.push(
+                {
+                    cartaGenerada: cartas[randomValues(cartas)],
+                    pintaGenerada: pintas[randomValues(pintas)]
+                })
+            console.log(i)
+
+            /*  setTodasLasCartas(
+                 [...todasLasCartas, {
+                     cartaGenerada: randomValues(cartas),
+                     pintaGenerada: randomValues(pintas)
+                 }]
+             ) */
+
         }
+        setTodasLasCartas(
+            resultado
+        )
     }
     const sort = (e) => {
         console.log(e.target.id);
@@ -46,7 +65,15 @@ const App = () => {
             <div className="Contenedor">
                 <div className="header">
                     <Formulario consigueValor={consigueValor} draw={draw} sort={sort} />
-                    <div className="card"></div>
+                    
+                </div>
+                <div className='resultado'>
+                    {
+                        todasLasCartas.length > 0 &&
+                        todasLasCartas.map((elemento, index,arr) => {
+                            return <Card numero={elemento.cartaGenerada} pinta={elemento.pintaGenerada}/>
+                        })
+                    }
                 </div>
                 <div className="content">
                     <h2></h2>
