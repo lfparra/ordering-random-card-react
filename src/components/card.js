@@ -1,11 +1,13 @@
 import React from "react";
 
-function Card(){
-    return(
+function Card(props) {
+    return (
         <>
-        <div class="carta"> 
-        <div class="numero spades"> A </div> 
-        </div>
+            <div class="carta">
+                <div class={`numero ${props.pinta}`}>
+                    {props.numero}
+                </div>
+            </div>
         </>
     )
 
